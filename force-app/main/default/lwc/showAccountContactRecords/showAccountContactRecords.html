@@ -1,0 +1,138 @@
+<template>
+    <lightning-card title="Accounts with Contacts">
+        <template if:true={accountRecord}>
+            <div class="slds-p-around_medium lgc-bg">
+                <lightning-tile>
+                    <dl class="slds-dl_horizontal">
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Account Name">Account Name:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.Name.value}</p>                           
+                        </dd>
+                        
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Number of Employees">Number of Employees:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.NumberOfEmployees.value}</p>                            
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Shipping Region Name">Shipping Region Name:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.Shipping_Region_Name__c.value}</p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Phone">Phone:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">
+                                <lightning-formatted-phone value={accountRecord.fields.Phone.value}>
+                                </lightning-formatted-phone>
+                            </p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Billing Street">Billing Street:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.BillingStreet.value}</p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Billing City">Billing City:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.BillingCity.value}</p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Phone">Billing State:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.BillingState.value}</p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Phone">Billing Postalcode:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{accountRecord.fields.BillingPostalCode.value}</p>
+                        </dd>
+
+                        <dt class="slds-dl_horizontal__label">
+                            <p class="slds-truncate" title="Phone">Total Contacts:</p>
+                        </dt>
+                        <dd class="slds-dl_horizontal__detail slds-tile__meta">
+                            <p class="slds-truncate">{contactlength}</p>
+                        </dd>
+                    </dl>
+                </lightning-tile>
+            </div>
+            <template if:true={customerSuccessContacts}>
+                <b>Customer Success Contacts</b>
+                <br />
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Last Name">Last Name</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Title">Title</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={customerSuccessContacts} for:item="contact">
+                            <tr class="slds-hint-parent" key={contact.Id}>
+                                <td data-label="Close Date">
+                                    <div class="slds-truncate">{contact.LastName}</div>
+                                </td>
+                                <td data-label="Prospecting">
+                                    <div class="slds-truncate">Customer Success</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+
+            </template>
+            <br />
+            <template if:true={appDevContacts}>
+                <b>Application Developer Contacts</b>
+                <br />
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Last Name">Last Name</div>
+                            </th>
+                            <th class="" scope="col">
+                                <div class="slds-truncate" title="Title">Title</div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template for:each={appDevContacts} for:item="contact">
+                            <tr class="slds-hint-parent" key={contact.Id}>
+                                <td data-label="Close Date">
+                                    <div class="slds-truncate">{contact.LastName}</div>
+                                </td>
+                                <td data-label="Prospecting">
+                                    <div class="slds-truncate">Application Developer</div>
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </template>
+        </template>
+        <template if:true={error}>
+            Error occured : {error}
+        </template>
+    </lightning-card>
+</template>
