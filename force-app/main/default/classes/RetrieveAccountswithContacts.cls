@@ -1,5 +1,5 @@
 public with sharing class RetrieveAccountswithContacts {
-    @AuraEnabled
+    @AuraEnabled(cacheable=true)
     public static List<Contact> retrieveContacts(String accId){
         List<Contact> conList = new List<Contact>();
         System.debug('accId : '+accId);
@@ -8,5 +8,5 @@ public with sharing class RetrieveAccountswithContacts {
         }
         System.debug('conList : '+conList);
         return  conList;
-    }    
+    }
 }
